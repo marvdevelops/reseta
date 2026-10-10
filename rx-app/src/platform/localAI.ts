@@ -39,7 +39,8 @@ export function freeSpaceOk(): boolean {
 // iOS opens at most 6 connections to one server and times a waiting request out after 60 seconds, so
 // 6 pieces run at once and each is small enough to finish well inside that.
 const CHUNK = 8 * 1024 * 1024;
-const PARALLEL = 6;
+// Two separate connection pools, 6 each: the file-system downloader and React Native's fetch.
+const PARALLEL = 12;
 const GIVE_UP_AFTER_MS = 3 * 60 * 1000; // no progress at all for this long
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -87,15 +88,28 @@ async function download(onProgress: (done: number, total: number) => void, signa
     report();
     let url = await resolveUrl(BASE + p.name, signal);
 
-    const fetchPiece = async (i: number) => {
+    const fetchPiece = async (i: number, lane: 'files' | 'fetch') => {
       const start = i * CHUNK, end = start + want(i) - 1, key = `${p.name}.${i}`;
       for (let attempt = 0; ; attempt++) {
         if (signal?.aborted) throw Object.assign(new Error('Stopped'), { name: 'AbortError' });
         try {
-          await File.downloadFileAsync(url, piece(i), {
-            idempotent: true, signal, headers: { Range: `bytes=${start}-${end}` },
-            onProgress: ({ bytesWritten }) => { live.set(key, bytesWritten); report(); },
-          });
+          if (lane === 'fetch') {
+            // fetch has its own connection pool, so these pieces don't wait behind the downloader's 6.
+            const res = await fetch(url, { headers: { Range: `bytes=${start}-${end}` }, signal });
+            if (res.status !== 206 && res.status !== 200) throw new Error(`HTTP ${res.status}`);
+            const buf = new Uint8Array(await res.arrayBuffer());
+            if (buf.length !== want(i)) throw new Error('Short piece');
+            const f = piece(i);
+            if (f.exists) f.delete();
+            f.create();
+            f.write(buf);
+            live.set(key, want(i));
+          } else {
+            await File.downloadFileAsync(url, piece(i), {
+              idempotent: true, signal, headers: { Range: `bytes=${start}-${end}` },
+              onProgress: ({ bytesWritten }) => { live.set(key, bytesWritten); report(); },
+            });
+          }
           if (piece(i).size !== want(i)) throw new Error('Short piece');
           live.delete(key); finished += want(i); report();
           return;
@@ -105,13 +119,14 @@ async function download(onProgress: (done: number, total: number) => void, signa
           if (Date.now() - lastGain > GIVE_UP_AFTER_MS) throw new Error('The download stopped moving. Check the Wi-Fi, then tap Continue.');
           await sleep(Math.min(15000, 2000 * 2 ** Math.min(attempt, 3)));
           if (attempt % 3 === 2) url = await resolveUrl(BASE + p.name, signal); // signed links expire; get a fresh one
+          if (lane === 'fetch' && attempt >= 1) lane = 'files'; // fall back to the file downloader
         }
       }
     };
     // A few downloads at a time, each taking the next piece from the list.
     const queue = [...todo];
-    await Promise.all(Array.from({ length: Math.min(PARALLEL, queue.length) }, async () => {
-      for (let i = queue.shift(); i !== undefined; i = queue.shift()) await fetchPiece(i);
+    await Promise.all(Array.from({ length: Math.min(PARALLEL, queue.length) }, async (_, w) => {
+      for (let i = queue.shift(); i !== undefined; i = queue.shift()) await fetchPiece(i, w % 2 ? 'fetch' : 'files');
     }));
 
     // Join the pieces into the model file, 4 MB at a time.
