@@ -1,0 +1,13 @@
+<!-- @dsCard group="Review" height=72 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>StateChip</title></head>
+<body>
+<div class="rs-row" id="root"></div>
+<script>
+  var R = window.Reseta, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null,
+    h(R.StateChip, { state: 'ok' }), h(R.StateChip, { state: 'check' }), h(R.StateChip, { state: 'stop' })));
+</script>
+</body>
+</html>

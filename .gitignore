@@ -1,0 +1,18 @@
+# Dependencies and generated native projects
+node_modules/
+rx-app/ios/
+rx-app/android/
+rx-app/dist/
+rx-app/.expo/
+
+# RxNorm release files (580 MB): download from https://download.nlm.nih.gov/rxnorm/
+03-rxnorm-licensing/RxNorm_full_prescribe_*/
+03-rxnorm-licensing/*.zip
+03-rxnorm-licensing/pack/out/
+
+# Local tooling
+.claude/
+rx-app/.claude/
+.DS_Store
+*.ipa
+.env*

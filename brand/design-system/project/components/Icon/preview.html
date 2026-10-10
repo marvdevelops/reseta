@@ -1,0 +1,14 @@
+<!-- @dsCard group="Foundations" height=96 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Icon</title></head>
+<body>
+<div class="rs-row" id="root"></div>
+<script>
+  var R = window.Reseta, h = React.createElement;
+  var names = ['check','alert','stop','camera','clock','pill','person','speaker','back','plus'];
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null,
+    names.map(function (n) { return h('span', { key: n, title: n, style: { color: 'var(--ink)' } }, h(R.Icon, { name: n, size: 36 })); })));
+</script>
+</body>
+</html>

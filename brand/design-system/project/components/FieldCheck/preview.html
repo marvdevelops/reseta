@@ -1,0 +1,21 @@
+<!-- @dsCard group="Review" height=760 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>FieldCheck</title></head>
+<body>
+<div class="rs-stack" id="root"></div>
+<script>
+  var R = window.Reseta, h = React.createElement;
+  function Demo() {
+    var s = React.useState(false), done = s[0], set = s[1];
+    return h(React.Fragment, null,
+      h(R.FieldCheck, { label: 'Medicine', value: 'amlodipine', state: 'check', crop: '/_blob/af33393a49187537a599a6b74963a1f5',
+        reason: 'Handwriting can be misread. Look at the paper and make sure the name is the same.', confirmed: done,
+        onMatch: function () { set(true); }, onChange: function () { set(false); } }),
+      h(R.FieldCheck, { label: 'How often', value: 'once a day?', state: 'stop', crop: '/_blob/3074d223e609e7e5485880d2811208f0',
+        reason: 'The paper says OD. It usually means once a day, but it can also mean right eye. Ask your pharmacist.' }));
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(Demo));
+</script>
+</body>
+</html>

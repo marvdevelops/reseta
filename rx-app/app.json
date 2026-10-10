@@ -1,0 +1,85 @@
+{
+  "expo": {
+    "name": "Reseta",
+    "slug": "reseta",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "ph.reseta.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Reseta uses the camera to photograph your prescription and your medicine. The photos stay on this phone.",
+        "NSPhotoLibraryUsageDescription": "Reseta opens a photo of your prescription or medicine that you choose. The photos stay on this phone.",
+        "NSCalendarsUsageDescription": "Reseta can add your medicine times to your calendar, with an alert at each one.",
+        "NSCalendarsFullAccessUsageDescription": "Reseta can add your medicine times to your calendar, with an alert at each one.",
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "entitlements": {
+        "com.apple.developer.kernel.increased-memory-limit": true,
+        "com.apple.developer.kernel.extended-virtual-addressing": true
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#2340B0",
+        "foregroundImage": "./assets/android-icon-foreground.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "ph.reseta.app",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-sharing",
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 160,
+          "backgroundColor": "#F3F5FA",
+          "dark": {
+            "image": "./assets/splash-icon.png",
+            "backgroundColor": "#0D1322"
+          }
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Reseta opens a photo of your prescription or medicine that you choose. The photos stay on this phone.",
+          "cameraPermission": "Reseta uses the camera to photograph your prescription and your medicine. The photos stay on this phone."
+        }
+      ],
+      [
+        "llama.rn",
+        {
+          "enableEntitlements": false,
+          "forceCxx20": true,
+          "enableOpenCLAndHexagon": false
+        }
+      ]
+    ],
+    "backgroundColor": "#F3F5FA",
+    "owner": "highbeamdigitalph",
+    "extra": {
+      "eas": {
+        "projectId": "edb87790-93c0-4c20-aabf-ab5bce800bf1"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/edb87790-93c0-4c20-aabf-ab5bce800bf1",
+      "checkAutomatically": "NEVER"
+    },
+    "runtimeVersion": {
+      "policy": "fingerprint"
+    }
+  }
+}

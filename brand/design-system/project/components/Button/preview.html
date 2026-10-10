@@ -1,0 +1,18 @@
+<!-- @dsCard group="Actions" height=230 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Button</title></head>
+<body>
+<div class="rs-stack" id="root"></div>
+<script>
+  var R = window.Reseta, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null,
+    h(R.Button, { block: true, icon: 'camera' }, 'Take photo'),
+    h(R.Button, { variant: 'secondary', block: true, icon: 'check' }, 'Matches the paper'),
+    h('div', { style: { display: 'flex', gap: 12, flexWrap: 'wrap' } },
+      h(R.Button, { variant: 'quiet', size: 'md', icon: 'back' }, 'Back'),
+      h(R.Button, { variant: 'danger', size: 'md' }, 'Delete reminder'),
+      h(R.Button, { size: 'md', disabled: true }, 'Save'))));
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;700&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap");
+
+/* Reseta components. Every value comes from tokens.css. */
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-sans); font-size: 20px; line-height: 28px; }
+.rs-stack { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-4); max-width: 420px; }
+.rs-row { display: flex; flex-wrap: wrap; gap: var(--space-3); padding: var(--space-4); align-items: center; }
+
+/* Icon */
+.rs-icon { display: inline-block; flex: none; vertical-align: middle; }
+
+/* Button */
+.rs-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); box-sizing: border-box;
+  min-height: var(--target-min); min-width: var(--target-min); padding: 0 var(--space-5); border-radius: var(--radius-md);
+  font-family: var(--font-sans); font-size: 22px; line-height: 26px; font-weight: 700; text-align: center;
+  border: 2px solid transparent; cursor: pointer; transition: background-color .15s, border-color .15s; }
+.rs-btn-lg { min-height: var(--target-primary); }
+.rs-btn-block { display: flex; width: 100%; }
+.rs-btn:focus-visible, .rs-choice:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+.rs-btn-primary { background: var(--tinta); color: var(--on-tinta); }
+.rs-btn-primary:active { background: var(--tinta-press); }
+.rs-btn-secondary { background: var(--surface); color: var(--tinta); border-color: var(--line-strong); }
+.rs-btn-secondary:active { background: var(--tinta-soft); }
+.rs-btn-quiet { background: transparent; color: var(--tinta); text-decoration: underline; text-underline-offset: 4px; padding: 0 var(--space-3); }
+.rs-btn-danger { background: var(--surface); color: var(--stop); border-color: var(--stop); }
+.rs-btn[disabled] { background: var(--surface-sunk); color: var(--ink-muted); border-color: var(--line); cursor: not-allowed; text-decoration: none; }
+
+/* StateChip */
+.rs-chip { display: inline-flex; align-items: center; gap: var(--space-1); padding: 4px 14px 4px 10px; border-radius: var(--radius-pill);
+  font-size: 18px; line-height: 24px; font-weight: 700; white-space: nowrap; }
+.rs-chip-ok { background: var(--ok-soft); color: var(--ok); }
+.rs-chip-check { background: var(--check-soft); color: var(--check); }
+.rs-chip-stop { background: var(--stop-soft); color: var(--stop); }
+
+/* Card shell shared by FieldCheck and DoseCard */
+.rs-card { background: var(--surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-raise); padding: var(--space-5);
+  display: flex; flex-direction: column; gap: var(--space-3); box-sizing: border-box; }
+
+/* FieldCheck */
+.rs-field-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); }
+.rs-label { font-size: 18px; line-height: 24px; font-weight: 700; color: var(--ink-muted); }
+.rs-crop { background: var(--surface-sunk); border-radius: var(--radius-sm); min-height: 72px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.rs-crop img { display: block; width: 100%; height: 88px; object-fit: contain; }
+.rs-crop-empty { color: var(--ink-muted); font-size: 18px; padding: var(--space-3); text-align: center; }
+.rs-value { font-size: 28px; line-height: 34px; font-weight: 700; color: var(--ink); overflow-wrap: anywhere; }
+.rs-value-mono { font-family: var(--font-mono); }
+.rs-reason { margin: 0; color: var(--ink); }
+.rs-done { display: flex; align-items: center; gap: var(--space-2); background: var(--ok-soft); color: var(--ok); border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4); font-weight: 700; }
+.rs-field-stop { box-shadow: var(--shadow-raise), inset 0 0 0 2px var(--stop); }
+.rs-field-check { box-shadow: var(--shadow-raise), inset 0 0 0 2px var(--check); }
+.rs-actions { display: flex; flex-direction: column; gap: var(--space-3); }
+
+/* ChoiceGroup */
+.rs-choices { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+.rs-choices legend { font-size: 22px; line-height: 30px; font-weight: 700; padding: 0 0 var(--space-3); }
+.rs-choice { display: flex; align-items: center; gap: var(--space-3); min-height: var(--target-min); padding: var(--space-3) var(--space-4);
+  background: var(--surface); border: 2px solid var(--line-strong); border-radius: var(--radius-md); text-align: left; cursor: pointer;
+  font-family: var(--font-sans); color: var(--ink); box-sizing: border-box; width: 100%; }
+.rs-choice[aria-checked="true"] { border-color: var(--tinta); background: var(--tinta-soft); }
+.rs-choice-dot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--line-strong); flex: none; display: flex; align-items: center; justify-content: center; }
+.rs-choice[aria-checked="true"] .rs-choice-dot { background: var(--tinta); border-color: var(--tinta); color: var(--on-tinta); }
+.rs-choice-text { display: flex; flex-direction: column; }
+.rs-choice-label { font-size: 22px; line-height: 28px; font-weight: 700; }
+.rs-choice-hint { font-size: 18px; line-height: 24px; color: var(--ink-muted); }
+
+/* DoseCard */
+.rs-dose-who { font-size: 26px; line-height: 32px; font-weight: 700; margin: 0; }
+.rs-dose-time { font-family: var(--font-mono); font-size: 44px; line-height: 48px; font-weight: 700; color: var(--tinta); }
+.rs-dose-med { font-family: var(--font-mono); font-size: 28px; line-height: 34px; font-weight: 700; }
+.rs-dose-how { margin: 0; font-size: 22px; line-height: 30px; }
+.rs-dose-photo { width: 96px; height: 96px; border-radius: var(--radius-sm); background: var(--surface-sunk); object-fit: cover; flex: none;
+  display: flex; align-items: center; justify-content: center; color: var(--ink-muted); }
+.rs-dose-top { display: flex; gap: var(--space-4); align-items: flex-start; justify-content: space-between; }
+
+/* StepHeader */
+.rs-step { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-2) var(--space-4) var(--space-4); }
+.rs-step-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.rs-step-count { background: var(--tinta-soft); color: var(--ink); border-radius: var(--radius-pill); padding: 4px 14px; font-size: 18px; line-height: 24px; font-weight: 700; }
+.rs-step-dots { display: flex; gap: 6px; }
+.rs-step-dot { width: 28px; height: 6px; border-radius: 3px; background: var(--line); }
+.rs-step-dot-on { background: var(--tinta); }
+.rs-step-title { font-size: 32px; line-height: 38px; font-weight: 700; letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+
+/* Notice */
+.rs-notice { display: flex; gap: var(--space-3); align-items: flex-start; padding: var(--space-4); border-radius: var(--radius-md); }
+.rs-notice-info { background: var(--tinta-soft); color: var(--ink); }
+.rs-notice-look { background: var(--highlighter); color: var(--on-highlighter); }
+.rs-notice-stop { background: var(--stop-soft); color: var(--ink); }
+.rs-notice-stop .rs-icon { color: var(--stop); }
+.rs-notice-title { font-weight: 700; margin: 0; }
+.rs-notice-body { margin: 0; }
+
+@media (prefers-reduced-motion: reduce) { .rs-btn { transition: none; } }

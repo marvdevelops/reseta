@@ -1,0 +1,13 @@
+<!-- @dsCard group="Flow" height=190 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>StepHeader</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var R = window.Reseta, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    h(R.StepHeader, { step: 2, total: 4, title: 'Check each line with the paper', onBack: function () {} }));
+</script>
+</body>
+</html>

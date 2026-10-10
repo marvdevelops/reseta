@@ -1,0 +1,117 @@
+{
+ "v": 3,
+ "layout": "files",
+ "createdOnFiles": {
+  "v": 1,
+  "at": "2026-10-09T13:52:00Z"
+ },
+ "title": "Reseta",
+ "namespace": "Reseta",
+ "libraries": [
+  {
+   "name": "react",
+   "version": "18"
+  },
+  {
+   "name": "react-dom",
+   "version": "18"
+  }
+ ],
+ "sections": {},
+ "groups": [
+  "Logos",
+  "Samples"
+ ],
+ "assetGroups": {
+  "Logos": {
+   "name": "Logos",
+   "tile": "l",
+   "order": [
+    "reseta-lockup.svg",
+    "reseta-lockup-white.svg",
+    "reseta-mark.svg",
+    "reseta-app-icon.svg",
+    "reseta-wordmark.svg",
+    "reseta-wordmark-white.svg",
+    "reseta-mark-ink.svg"
+   ],
+   "files": {
+    "reseta-lockup.svg": {
+     "name": "reseta-lockup.svg",
+     "blob": "350b396e289b87341f056f149e4fdc02",
+     "size": 6118,
+     "type": "image/svg+xml"
+    },
+    "reseta-lockup-white.svg": {
+     "name": "reseta-lockup-white.svg",
+     "blob": "8603a9f1f4cc24198e2d48b3594bc228",
+     "size": 6118,
+     "type": "image/svg+xml"
+    },
+    "reseta-mark.svg": {
+     "name": "reseta-mark.svg",
+     "blob": "3cffea6e314474d7d3ccb90f810c1ba5",
+     "size": 413,
+     "type": "image/svg+xml"
+    },
+    "reseta-app-icon.svg": {
+     "name": "reseta-app-icon.svg",
+     "blob": "5d72e08693d25ae7e0ca862fe7df3ef1",
+     "size": 407,
+     "type": "image/svg+xml"
+    },
+    "reseta-wordmark.svg": {
+     "name": "reseta-wordmark.svg",
+     "blob": "8cd8f040ace59ca6e62ad152309be320",
+     "size": 5744,
+     "type": "image/svg+xml"
+    },
+    "reseta-wordmark-white.svg": {
+     "name": "reseta-wordmark-white.svg",
+     "blob": "6e74aeb3ac2fd9d9dc3c3c8ab411bdc1",
+     "size": 5744,
+     "type": "image/svg+xml"
+    },
+    "reseta-mark-ink.svg": {
+     "name": "reseta-mark-ink.svg",
+     "blob": "3d15c64c65dfb16116392a21dab8c49e",
+     "size": 358,
+     "type": "image/svg+xml"
+    }
+   }
+  },
+  "Samples": {
+   "name": "Samples",
+   "tile": "m",
+   "order": [
+    "crop-medicine.jpg",
+    "crop-schedule.jpg"
+   ],
+   "files": {
+    "crop-medicine.jpg": {
+     "name": "crop-medicine.jpg",
+     "blob": "af33393a49187537a599a6b74963a1f5",
+     "size": 7773,
+     "type": "image/jpeg"
+    },
+    "crop-schedule.jpg": {
+     "name": "crop-schedule.jpg",
+     "blob": "3074d223e609e7e5485880d2811208f0",
+     "size": 8143,
+     "type": "image/jpeg"
+    }
+   }
+  }
+ },
+ "blobs": {},
+ "docs": {
+  "readme": "project/README.md",
+  "sections": []
+ },
+ "lastChange": {
+  "by": "Marv",
+  "at": "2026-10-09T13:52:00Z",
+  "via": "Claude Code",
+  "note": "First Reseta brand: logo, tokens, brand book and seven components."
+ }
+}

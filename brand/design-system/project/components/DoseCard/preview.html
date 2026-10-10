@@ -1,0 +1,13 @@
+<!-- @dsCard group="Reminders" height=520 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>DoseCard</title></head>
+<body>
+<div class="rs-stack" id="root"></div>
+<script>
+  var R = window.Reseta, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    h(R.DoseCard, { person: 'Lola Rosa', time: '8:00 AM', medicine: 'Amlodipine 5 mg', amount: '1 tablet', instruction: 'after breakfast' }));
+</script>
+</body>
+</html>

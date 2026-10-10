@@ -1,0 +1,15 @@
+<!-- @dsCard group="Feedback" height=300 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Notice</title></head>
+<body>
+<div class="rs-stack" id="root"></div>
+<script>
+  var R = window.Reseta, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null,
+    h(R.Notice, { tone: 'info' }, 'You can change the times later.'),
+    h(R.Notice, { tone: 'look', title: 'Look at the paper first' }, 'Amlodipine and amiloride look alike. Ask your pharmacist which one.'),
+    h(R.Notice, { tone: 'stop', title: 'Before you save' }, 'Type the strength from the medicine label.')));
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!-- @dsCard group="Input" height=420 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>ChoiceGroup</title></head>
+<body>
+<div class="rs-stack" id="root"></div>
+<script>
+  var R = window.Reseta, h = React.createElement;
+  function Demo() {
+    var s = React.useState('lola'), v = s[0], set = s[1];
+    return h(R.ChoiceGroup, { label: 'Who is this medicine for?', value: v, onChange: set, options: [
+      { value: 'me', label: 'Me' },
+      { value: 'lola', label: 'Lola Rosa', hint: 'Wakes 6:00 AM, sleeps 9:00 PM' },
+      { value: 'new', label: 'Someone else' }] });
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(Demo));
+</script>
+</body>
+</html>
