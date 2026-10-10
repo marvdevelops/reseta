@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { View } from 'react-native';
-import { AI_DOWNLOAD_BYTES, AI_NAME, aiInstalled, aiSupported, deleteAI, downloadAI, downloadedSoFar, freeSpaceOk } from '../platform/localAI';
+import { Linking } from 'react-native';
+import { AI_DOWNLOAD_BYTES, AI_FILES, AI_NAME, aiInstalled, aiSupported, deleteAI, downloadAI, downloadedSoFar, freeSpaceOk, installAIFromFiles } from '../platform/localAI';
 import { pageToolsAvailable } from '../platform/vision';
 import { Body, Button, Caption, Card, ConfirmButton, Heading, Notice, R, S, Stack, useColors } from './kit';
 
@@ -52,6 +53,21 @@ export function AICard({ toast }: { toast: (m: string) => void }) {
               toast(e?.name === 'AbortError' ? 'Download stopped. It will continue where it left off.' : (e?.message || 'The download did not finish. Check the internet connection and try again.'));
             } finally { setProgress(null); setAlready(downloadedSoFar()); }
           }} />
+          <View style={{ borderTopWidth: 1, borderTopColor: c.line, paddingTop: S[3], gap: S[3] }}>
+            <Body>Download is slow? Get the two AI files yourself (in Safari, or on a computer and AirDrop them to this phone), then add them here.</Body>
+            {AI_FILES.map((f) => (
+              <Button key={f.name} variant="quiet" size="md" title={`Get ${f.name.startsWith('mmproj') ? 'file 2: image part' : 'file 1: the model'} (${mb(f.bytes)} MB)`} onPress={() => Linking.openURL(f.url)} />
+            ))}
+            <Button variant="secondary" icon="plus" title="Add the files I downloaded" onPress={async () => {
+              try {
+                const r = await installAIFromFiles();
+                setInstalled(aiInstalled());
+                if (!r.missing.length) toast('The AI reader is on.');
+                else if (r.added.length) toast(`Added. Still needed: ${r.missing.length === 1 ? 'one more file' : 'both files'}.`);
+                else toast('Those are not the AI files. Pick the two .gguf files you downloaded.');
+              } catch { toast('Reseta could not add those files. Try again.'); }
+            }} />
+          </View>
           {!freeSpaceOk() ? <Caption muted>{`Free up about ${gb(AI_DOWNLOAD_BYTES + 512 * 1024 ** 2)} GB on this phone first.`}</Caption> : null}
         </Stack>
       )}

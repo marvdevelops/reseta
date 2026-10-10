@@ -148,6 +148,30 @@ async function download(onProgress: (done: number, total: number) => void, signa
   report();
 }
 
+export const AI_FILES = PARTS.map((p) => ({ name: p.name, url: BASE + p.name, bytes: p.bytes }));
+
+/**
+ * Installs the model from files the user downloaded themselves (Safari, or AirDrop from a computer).
+ * Files are recognised by their exact size, so their names don't matter. Returns what is still missing.
+ */
+export async function installAIFromFiles(): Promise<{ added: string[]; missing: string[] }> {
+  const r: any = await (File as any).pickFileAsync({ multipleFiles: true });
+  const picked: File[] = r?.canceled ? [] : Array.isArray(r?.result) ? r.result : r?.result ? [r.result] : Array.isArray(r) ? r : r ? [r] : [];
+  const d = dir();
+  if (!d.exists) d.create({ intermediates: true });
+  const added: string[] = [];
+  for (const f of picked) {
+    const part = PARTS.find((p) => p.bytes === f.size);
+    if (!part) continue;
+    const target = fileOf(part.name);
+    if (target.exists) target.delete();
+    try { await (f as any).move(target); } catch { await (f as any).copy(target); }
+    if (target.exists && target.size === part.bytes) added.push(part.name);
+  }
+  const missing = PARTS.filter((p) => { const t = fileOf(p.name); return !(t.exists && t.size === p.bytes); }).map((p) => p.name);
+  return { added, missing };
+}
+
 /** How much of an earlier, stopped download is already on the phone. */
 export function downloadedSoFar(): number {
   try {

@@ -9,3 +9,5 @@ export const downloadedSoFar = () => 0;
 export async function deleteAI() {}
 export async function readLineAI(_crop: string): Promise<string | null> { return null; }
 export async function releaseAI() {}
+export const AI_FILES: { name: string; url: string; bytes: number }[] = [];
+export async function installAIFromFiles() { return { added: [] as string[], missing: [] as string[] }; }
